@@ -1,16 +1,58 @@
-import type { PreTrainedTokenizer } from "@huggingface/transformers";
+type WorkerResponse =
+	| { id: string; type: "result"; count: number }
+	| { id: string; type: "error"; message: string };
 
-type EncodeFn = (text: string) => number[];
+let worker: Worker | null = null;
+let workerLoading: Promise<Worker> | null = null;
+const pending = new Map<
+	string,
+	{ resolve: (count: number) => void; reject: (err: Error) => void }
+>();
 
-const openaiEncoderCache = new Map<string, EncodeFn>();
-
-async function getOpenAIEncoder(modelName: string): Promise<EncodeFn> {
-	const cached = openaiEncoderCache.get(modelName);
-	if (cached) return cached;
-	const { encode } = await import(`./openai/${modelName}.ts`);
-	openaiEncoderCache.set(modelName, encode);
-	return encode;
+function getWorker(): Promise<Worker> {
+	if (worker) return Promise.resolve(worker);
+	if (workerLoading) return workerLoading;
+	workerLoading = (async () => {
+		const w = new Worker(
+			new URL("../workers/tokenizer.worker.ts", import.meta.url),
+			{ type: "module" },
+		);
+		w.onmessage = (e: MessageEvent<WorkerResponse>) => {
+			const { id } = e.data;
+			const p = pending.get(id);
+			if (!p) return;
+			pending.delete(id);
+			if (e.data.type === "result") {
+				p.resolve(e.data.count);
+			} else {
+				p.reject(new Error(e.data.message));
+			}
+		};
+		w.onerror = () => {
+			const err = new Error("Tokenizer worker error");
+			for (const [, p] of pending) p.reject(err);
+			pending.clear();
+		};
+		worker = w;
+		return w;
+	})();
+	return workerLoading;
 }
+
+function sendRequest(
+	type: "count-openai" | "count-hf",
+	payload: Record<string, string>,
+): Promise<number> {
+	const id = crypto.randomUUID();
+	return getWorker().then(
+		(w) =>
+			new Promise<number>((resolve, reject) => {
+				pending.set(id, { resolve, reject });
+				w.postMessage({ id, type, ...payload });
+			}),
+	);
+}
+
 
 export async function countOpenAITokens(
 	text: string,
@@ -18,46 +60,14 @@ export async function countOpenAITokens(
 ): Promise<number> {
 	const trimmed = text.trim();
 	if (!trimmed || !modelName) return 0;
-	const encode = await getOpenAIEncoder(modelName);
-	return encode(trimmed).length;
+	return sendRequest("count-openai", { text: trimmed, modelName });
 }
 
-const tokenizerCache = new Map<string, PreTrainedTokenizer>();
-const pendingLoads = new Map<string, Promise<PreTrainedTokenizer>>();
-
-async function loadTokenizer(modelId: string): Promise<PreTrainedTokenizer> {
-	const cachedTokenizer = tokenizerCache.get(modelId);
-	if (cachedTokenizer) {
-		return cachedTokenizer;
-	}
-
-	const pending = pendingLoads.get(modelId);
-	if (pending) return pending;
-
-	const loadPromise = (async () => {
-		const { AutoTokenizer } = await import("@huggingface/transformers");
-		const tokenizer = await AutoTokenizer.from_pretrained(modelId);
-		tokenizerCache.set(modelId, tokenizer);
-		pendingLoads.delete(modelId);
-		return tokenizer;
-	})();
-
-	pendingLoads.set(modelId, loadPromise);
-	return loadPromise;
-}
-
-export async function countHFTokens(text: string, modelId: string): Promise<number> {
+export async function countHFTokens(
+	text: string,
+	modelId: string,
+): Promise<number> {
 	const trimmed = text.trim();
 	if (!trimmed || !modelId) return 0;
-
-	const tokenizer = await loadTokenizer(modelId);
-	const encoded = await tokenizer.encode(trimmed);
-
-	if (Array.isArray(encoded)) {
-		return encoded.length;
-	}
-	if (encoded && typeof encoded === "object" && "input_ids" in encoded) {
-		return (encoded as { input_ids: number[] }).input_ids.length;
-	}
-	return 0;
+	return sendRequest("count-hf", { text: trimmed, modelId });
 }
