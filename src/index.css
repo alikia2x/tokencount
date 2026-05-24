@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+body {
+	@apply bg-neutral-50 dark:bg-neutral-900;
+}
+
+textarea {
+	scrollbar-width: thin;
+	scrollbar-color: #a3a3a3 transparent;
+}
+
+textarea::-webkit-scrollbar {
+	width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+	background: #a3a3a3;
+	border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+	background: #737373;
+}
+
+.dark textarea {
+	scrollbar-color: #525252 transparent;
+}
+
+.dark textarea::-webkit-scrollbar-thumb {
+	background: #525252;
+}
+
+.dark textarea::-webkit-scrollbar-thumb:hover {
+	background: #404040;
+}
+
