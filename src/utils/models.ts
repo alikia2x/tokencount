@@ -53,8 +53,15 @@ const MINIMAX_VARIANTS: ModelVariant[] = [
 	{ hfModelId: "MiniMaxAI/MiniMax-M2.5", displayName: "M2.5" },
 ];
 
+const GEMINI_VARIANTS: ModelVariant[] = [
+	{ hfModelId: "google/gemma-4-31B", displayName: "3.5 Flash" },
+	{ hfModelId: "google/gemma-4-31B", displayName: "3.1 Pro" },
+	{ hfModelId: "google/gemma-4-31B", displayName: "3.1 Flash Lite" },
+];
+
 export const MODEL_FAMILIES: ModelFamily[] = [
 	{ id: "openai", name: "GPT", tokenizerType: "openai", models: OPENAI_VARIANTS },
+	{ id: "gemini", name: "Gemini", tokenizerType: "hf", models: GEMINI_VARIANTS },
 	{ id: "deepseek", name: "DeepSeek", tokenizerType: "hf", models: DEEPSEEK_VARIANTS },
 	{ id: "glm", name: "GLM", tokenizerType: "hf", models: GLM_VARIANTS },
 	{ id: "kimi", name: "Kimi", tokenizerType: "hf", models: KIMI_VARIANTS },
