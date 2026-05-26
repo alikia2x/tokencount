@@ -22,10 +22,7 @@ async function getOpenAIEncoder(modelName: string): Promise<EncodeFn> {
 	return encode;
 }
 
-async function countOpenAITokens(
-	text: string,
-	modelName: string,
-): Promise<number> {
+async function countOpenAITokens(text: string, modelName: string): Promise<number> {
 	const trimmed = text.trim();
 	if (!trimmed || !modelName) return 0;
 	const encode = await getOpenAIEncoder(modelName);

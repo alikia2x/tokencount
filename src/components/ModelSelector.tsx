@@ -119,8 +119,10 @@ const FamilyCard = (props: {
 		<div
 			class="flex items-center justify-between px-4 py-3 rounded-lg border cursor-pointer transition-colors"
 			classList={{
-				"bg-neutral-100 dark:bg-neutral-700 border-neutral-400 dark:border-neutral-500": isSelected(),
-				"bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700": !isSelected(),
+				"bg-neutral-100 dark:bg-neutral-700 border-neutral-400 dark:border-neutral-500":
+					isSelected(),
+				"bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700":
+					!isSelected(),
 			}}
 			onClick={() => props.onSelect(props.family.id)}
 		>
@@ -135,9 +137,7 @@ const FamilyCard = (props: {
 						class="text-sm bg-neutral-100 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-md px-2.5 py-1.5 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-neutral-400 cursor-pointer min-w-0"
 					>
 						<For each={props.family.models}>
-							{(model, idx) => (
-								<option value={idx()}>{model.displayName}</option>
-							)}
+							{(model, idx) => <option value={idx()}>{model.displayName}</option>}
 						</For>
 					</select>
 				)}
@@ -149,15 +149,11 @@ const FamilyCard = (props: {
 				{!hfLoading() &&
 					tokenCount() !== null &&
 					`${tokenCount()!.toLocaleString()} tokens`}
-				{!hfLoading() &&
-					props.family.tokenizerType === "hf" &&
-					!hasModelId && (
-						<span class="text-neutral-400 dark:text-neutral-500">—</span>
-					)}
+				{!hfLoading() && props.family.tokenizerType === "hf" && !hasModelId && (
+					<span class="text-neutral-400 dark:text-neutral-500">—</span>
+				)}
 				{hfError() && (
-					<span class="text-red-600 dark:text-red-400 text-xs">
-						Error: {hfError()}
-					</span>
+					<span class="text-red-600 dark:text-red-400 text-xs">Error: {hfError()}</span>
 				)}
 			</div>
 		</div>
@@ -224,8 +220,10 @@ const CustomCard = (props: {
 		<div
 			class="flex items-center justify-between px-4 py-3 rounded-lg border cursor-pointer transition-colors"
 			classList={{
-				"bg-neutral-100 dark:bg-neutral-700 border-neutral-400 dark:border-neutral-500": isSelected(),
-				"bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700": !isSelected(),
+				"bg-neutral-100 dark:bg-neutral-700 border-neutral-400 dark:border-neutral-500":
+					isSelected(),
+				"bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700":
+					!isSelected(),
 			}}
 			onClick={() => {
 				props.onSelect(CUSTOM_FAMILY_ID);
@@ -251,15 +249,10 @@ const CustomCard = (props: {
 				/>
 			</div>
 			<div class="text-sm tabular-nums shrink-0 ml-4 text-neutral-900 dark:text-white">
-				{loading() && (
-					<span class="text-neutral-400 dark:text-neutral-500 italic">…</span>
-				)}
-				{!loading() && tokenCount() !== null &&
-					`${tokenCount()!.toLocaleString()} tokens`}
+				{loading() && <span class="text-neutral-400 dark:text-neutral-500 italic">…</span>}
+				{!loading() && tokenCount() !== null && `${tokenCount()!.toLocaleString()} tokens`}
 				{!loading() && error() && (
-					<span class="text-red-600 dark:text-red-400 text-xs">
-						{error()}
-					</span>
+					<span class="text-red-600 dark:text-red-400 text-xs">{error()}</span>
 				)}
 			</div>
 		</div>

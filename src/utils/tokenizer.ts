@@ -13,10 +13,9 @@ function getWorker(): Promise<Worker> {
 	if (worker) return Promise.resolve(worker);
 	if (workerLoading) return workerLoading;
 	workerLoading = (async () => {
-		const w = new Worker(
-			new URL("../workers/tokenizer.worker.ts", import.meta.url),
-			{ type: "module" },
-		);
+		const w = new Worker(new URL("../workers/tokenizer.worker.ts", import.meta.url), {
+			type: "module",
+		});
 		w.onmessage = (e: MessageEvent<WorkerResponse>) => {
 			const { id } = e.data;
 			const p = pending.get(id);
@@ -41,7 +40,7 @@ function getWorker(): Promise<Worker> {
 
 function sendRequest(
 	type: "count-openai" | "count-hf",
-	payload: Record<string, string>,
+	payload: Record<string, string>
 ): Promise<number> {
 	const id = crypto.randomUUID();
 	return getWorker().then(
@@ -49,24 +48,17 @@ function sendRequest(
 			new Promise<number>((resolve, reject) => {
 				pending.set(id, { resolve, reject });
 				w.postMessage({ id, type, ...payload });
-			}),
+			})
 	);
 }
 
-
-export async function countOpenAITokens(
-	text: string,
-	modelName: string,
-): Promise<number> {
+export async function countOpenAITokens(text: string, modelName: string): Promise<number> {
 	const trimmed = text.trim();
 	if (!trimmed || !modelName) return 0;
 	return sendRequest("count-openai", { text: trimmed, modelName });
 }
 
-export async function countHFTokens(
-	text: string,
-	modelId: string,
-): Promise<number> {
+export async function countHFTokens(text: string, modelId: string): Promise<number> {
 	const trimmed = text.trim();
 	if (!trimmed || !modelId) return 0;
 	return sendRequest("count-hf", { text: trimmed, modelId });

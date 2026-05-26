@@ -15,9 +15,7 @@ const Footer = () => {
 						alikia2x
 					</a>
 				</p>
-				<span>
-					v{pkg.version}
-				</span>
+				<span>v{pkg.version}</span>
 			</div>
 		</footer>
 	);
