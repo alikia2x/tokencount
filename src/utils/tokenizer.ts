@@ -38,18 +38,16 @@ function getWorker(): Promise<Worker> {
 	return workerLoading;
 }
 
-function sendRequest(
+async function sendRequest(
 	type: "count-openai" | "count-hf",
 	payload: Record<string, string>
 ): Promise<number> {
 	const id = crypto.randomUUID();
-	return getWorker().then(
-		(w) =>
-			new Promise<number>((resolve, reject) => {
-				pending.set(id, { resolve, reject });
-				w.postMessage({ id, type, ...payload });
-			})
-	);
+	const w = await getWorker();
+	return await new Promise<number>((resolve, reject) => {
+		pending.set(id, { resolve, reject });
+		w.postMessage({ id, type, ...payload });
+	});
 }
 
 export async function countOpenAITokens(text: string, modelName: string): Promise<number> {

@@ -26,7 +26,7 @@ const TextInput = (props: TextInputProps) => {
 					class={
 						`px-2.5 py-1 text-neutral-500 dark:text-neutral-400 hover:text-neutral-700
 				 dark:hover:text-neutral-200 transition-colors ` +
-						(props.text().length > 0 && "invisible")
+						(props.text().length === 0 && "invisible")
 					}
 				>
 					Clear
