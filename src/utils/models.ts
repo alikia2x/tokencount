@@ -17,6 +17,7 @@ const OPENAI_VARIANTS: ModelVariant[] = [
 	{ hfModelId: "", displayName: "GPT-5.x", openaiModel: "o200k_base" },
 	{ hfModelId: "", displayName: "GPT-4o", openaiModel: "o200k_base" },
 	{ hfModelId: "", displayName: "GPT-4", openaiModel: "cl100k_base" },
+	{ hfModelId: "", displayName: "GPT-OSS", openaiModel: "o200k_harmony" },
 ];
 
 const DEEPSEEK_VARIANTS: ModelVariant[] = [

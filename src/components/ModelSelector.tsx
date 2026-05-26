@@ -30,16 +30,18 @@ const FamilyCard = (props: {
 	const [hfLoading, setHfLoading] = createSignal(false);
 	const [hfError, setHfError] = createSignal<string | null>(null);
 	let cancelled = false;
+	let currentCallId = 0;
 
 	onCleanup(() => {
 		cancelled = true;
 	});
 
 	const countTokens = async () => {
+		const callId = ++currentCallId;
 		const t = props.text().trim();
 		if (!t) {
-			setTokenCount(null);
-			props.onTokenCount(props.family.id, null);
+			setTokenCount(0);
+			props.onTokenCount(props.family.id, 0);
 			return;
 		}
 
@@ -47,36 +49,48 @@ const FamilyCard = (props: {
 			const variant = props.family.models[props.selectedIndex()];
 			if (variant?.openaiModel) {
 				const count = await countOpenAITokens(t, variant.openaiModel);
-				if (!cancelled) {
+				if (!cancelled && callId === currentCallId) {
 					setTokenCount(count);
 					props.onTokenCount(props.family.id, count);
 				}
 			} else {
-				setTokenCount(null);
-				props.onTokenCount(props.family.id, null);
+				if (!cancelled && callId === currentCallId) {
+					setTokenCount(null);
+					props.onTokenCount(props.family.id, null);
+				}
 			}
 			return;
 		}
 
 		const variant = props.family.models[props.selectedIndex()];
 		if (!variant?.hfModelId) {
-			setTokenCount(null);
-			props.onTokenCount(props.family.id, null);
+			if (!cancelled && callId === currentCallId) {
+				setTokenCount(null);
+				props.onTokenCount(props.family.id, null);
+			}
 			return;
 		}
 
-		setHfLoading(true);
+		// Delay showing "…" by 200ms — if count finishes before that, skip loading entirely
+		const loadingTimeout = setTimeout(() => {
+			if (!cancelled && callId === currentCallId) {
+				setHfLoading(true);
+			}
+		}, 200);
+
 		setHfError(null);
 		countHFTokens(t, variant.hfModelId)
 			.then((count) => {
-				if (!cancelled) {
+				if (!cancelled && callId === currentCallId) {
+					clearTimeout(loadingTimeout);
 					setTokenCount(count);
 					props.onTokenCount(props.family.id, count);
 					setHfLoading(false);
 				}
 			})
 			.catch((err: Error) => {
-				if (!cancelled) {
+				if (!cancelled && callId === currentCallId) {
+					clearTimeout(loadingTimeout);
 					setHfError(err.message);
 					setTokenCount(null);
 					props.onTokenCount(props.family.id, null);
@@ -173,8 +187,8 @@ const CustomCard = (props: {
 		const id = props.modelId().trim();
 
 		if (!t || !id) {
-			setTokenCount(null);
-			props.onTokenCount(CUSTOM_FAMILY_ID, null);
+			setTokenCount(0);
+			props.onTokenCount(CUSTOM_FAMILY_ID, 0);
 			return;
 		}
 

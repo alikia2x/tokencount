@@ -3,7 +3,9 @@ import Header from "./components/Header";
 import TextInput from "./components/TextInput";
 import TokenDisplay from "./components/TokenDisplay";
 import ModelSelector from "./components/ModelSelector";
+import Footer from "./components/Footer";
 import { MODEL_FAMILIES } from "./utils/models";
+import { FAQ } from "./components/FAQ";
 
 function persistedSignal<T>(key: string, fallback: T) {
 	const stored = localStorage.getItem(key);
@@ -19,17 +21,18 @@ const App = () => {
 	const charCount = createMemo(() => text().trim().length);
 
 	const [selectedFamilyId, setSelectedFamilyId] = persistedSignal("tc_family", "openai");
-	const [familyTokenCounts, setFamilyTokenCounts] = createSignal<
-		Record<string, number | null>
-	>({});
-	const [selectedModelIndices, setSelectedModelIndices] = persistedSignal<
-		Record<string, number>
-	>("tc_models", {});
+	const [familyTokenCounts, setFamilyTokenCounts] = createSignal<Record<string, number | null>>(
+		{}
+	);
+	const [selectedModelIndices, setSelectedModelIndices] = persistedSignal<Record<string, number>>(
+		"tc_models",
+		{}
+	);
 	const [customModelId, setCustomModelId] = persistedSignal("tc_custom", "");
 
 	const displayTokenCount = createMemo(() => {
 		const count = familyTokenCounts()[selectedFamilyId()];
-		return count ?? 0;
+		return count;
 	});
 
 	const handleFamilySelect = (familyId: string) => {
@@ -55,11 +58,7 @@ const App = () => {
 					</div>
 
 					<div class="flex-1 lg:min-w-0 flex flex-col gap-8">
-						<TokenDisplay
-							tokenCount={displayTokenCount()}
-							charCount={charCount()}
-							loading={false}
-						/>
+						<TokenDisplay tokenCount={displayTokenCount()} charCount={charCount()} />
 
 						<ModelSelector
 							families={MODEL_FAMILIES}
@@ -74,6 +73,10 @@ const App = () => {
 						/>
 					</div>
 				</div>
+
+				<FAQ />
+
+				<Footer />
 			</div>
 		</div>
 	);

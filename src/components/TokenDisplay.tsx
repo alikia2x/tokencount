@@ -1,7 +1,6 @@
 interface TokenDisplayProps {
-	tokenCount: number;
+	tokenCount: number | null;
 	charCount: number;
-	loading: boolean;
 }
 
 const TokenDisplay = (props: TokenDisplayProps) => {
@@ -11,16 +10,14 @@ const TokenDisplay = (props: TokenDisplayProps) => {
 				<span
 					class="text-6xl font-light tabular-nums text-neutral-900 dark:text-white leading-none"
 					classList={{
-						"opacity-50 animate-pulse": props.loading && props.tokenCount === 0,
+						"opacity-50 animate-pulse": props.tokenCount === null,
 					}}
 				>
-					{props.loading && props.tokenCount === 0
+					{props.tokenCount === null || props.tokenCount === undefined
 						? "…"
 						: props.tokenCount.toLocaleString()}
 				</span>
-				<span class="text-2xl text-neutral-400 dark:text-neutral-500">
-					tokens
-				</span>
+				<span class="text-2xl text-neutral-400 dark:text-neutral-500">tokens</span>
 			</div>
 		</div>
 	);

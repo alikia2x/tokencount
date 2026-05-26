@@ -1,8 +1,10 @@
-# LLM Token Counter
+# Token Counter
 
 A privacy-focused, client-side token counting tool for LLMs. Paste text and see token counts across multiple model families — all computation happens in your browser, nothing is sent to any server.
 
 Built with [SolidJS](https://www.solidjs.com/), [Vite](https://vitejs.dev/), and [Tailwind CSS](https://tailwindcss.com/).
+
+![App Preview Screenshot](./assets/screenshot.webp)
 
 ## Features
 

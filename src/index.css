@@ -4,6 +4,40 @@ body {
 	@apply bg-neutral-50 dark:bg-neutral-900;
 }
 
+/* FAQ: smooth height animation on details open/close */
+.faq-content {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.25s ease;
+}
+
+details[open] .faq-content {
+	grid-template-rows: 1fr;
+}
+
+.faq-content > div {
+	overflow: hidden;
+}
+
+/* Remove default marker triangle */
+details summary::-webkit-details-marker {
+	display: none;
+}
+
+details summary::marker {
+	content: none;
+	display: none;
+}
+
+/* Custom chevron rotation */
+.faq-chevron {
+	transition: transform 0.2s ease;
+}
+
+details[open] .faq-chevron {
+	transform: rotate(180deg);
+}
+
 textarea {
 	scrollbar-width: thin;
 	scrollbar-color: #a3a3a3 transparent;
@@ -38,3 +72,12 @@ textarea::-webkit-scrollbar-thumb:hover {
 	background: #404040;
 }
 
+html {
+    -ms-overflow-style: none;
+    
+    scrollbar-width: none;
+    
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
