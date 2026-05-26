@@ -59,6 +59,27 @@ const faqData: FAQType[] = [
 			</>
 		),
 	},
+	{
+		question: "Where is Claude?",
+		answer: (
+			<>
+				Unfortunately, it is currently impossible to count tokens for Claude models locally
+				because Anthropic has not publicly released their tokenizer vocabularies. If you
+				need to count tokens for Claude models, we recommend using {" "}
+				<a
+					href="https://claude-tokenizer.vercel.app/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-neutral-700 dark:text-neutral-300 underline underline-offset-4 hover:text-neutral-900 dark:hover:text-neutral-100"
+				>
+					this website by Shaf
+				</a>
+				. However, please be aware that the site sends your text content to their server to
+				forward to Anthropic's internal servers, so privacy-focused users may check their
+				corresponding privacy policy first.
+			</>
+		),
+	},
 ];
 
 function FAQItem(props: FAQType) {

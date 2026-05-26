@@ -15,7 +15,7 @@ const Header = () => {
 				</a>
 			</div>
 			<p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-				Paste text to count tokens across popular models.
+				Paste text to count tokens across popular models, locally.
 			</p>
 		</header>
 	);

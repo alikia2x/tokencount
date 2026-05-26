@@ -4,7 +4,7 @@ A privacy-focused, client-side token counting tool for LLMs. Paste text and see 
 
 Built with [SolidJS](https://www.solidjs.com/), [Vite](https://vitejs.dev/), and [Tailwind CSS](https://tailwindcss.com/).
 
-![App Preview Screenshot](./assets/screenshot.webp)
+![App Screenshot](./assets/screenshot.webp)
 
 ## Features
 
