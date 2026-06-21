@@ -35,7 +35,7 @@ const GLM_VARIANTS: ModelVariant[] = [
 ];
 
 const KIMI_VARIANTS: ModelVariant[] = [
-	{ hfModelId: "alikia2x/k2.7-tokenizer", displayName: "K2.7 Code" },
+	{ hfModelId: "alikia2x/k2.6-tokenizer", displayName: "K2.7 Code" },
 	{ hfModelId: "alikia2x/k2.6-tokenizer", displayName: "K2.6" },
 	{ hfModelId: "alikia2x/k2.6-tokenizer", displayName: "K2.5" },
 ];

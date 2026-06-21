@@ -41,7 +41,7 @@ const faqData: FAQType[] = [
 		answer: (
 			<>
 				Yes, our counter aligns with the official results for most models. The only
-				exceptions are Gemini and Kimi, for which we provide highly accurate estimations.
+				exception is Kimi, for which we provide highly accurate estimations.
 				Please note that real token usage in production may be slightly higher (by a few to
 				a few dozen tokens) than these figures, due to the addition of special tokens
 				required by specific model architectures or system prompts.
@@ -88,7 +88,7 @@ function FAQItem(props: FAQType) {
 			<summary class="marker:content-none flex items-center justify-between cursor-pointer hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">
 				<span>{props.question}</span>
 				<svg
-					class="faq-chevron w-4 h-4 shrink-0 ml-2 transition-transform duration-200 group-open:rotate-180"
+					class="faq-chevron w-4 h-4 shrink-0 ml-2 transition-transform duration-200 group-open:rotate-360"
 					viewBox="0 0 20 20"
 					fill="currentColor"
 				>

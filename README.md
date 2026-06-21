@@ -19,11 +19,11 @@ Built with [SolidJS](https://www.solidjs.com/), [Vite](https://vitejs.dev/), and
 | GPT | o200k_base / cl100k_base | GPT-5.x, GPT-4o, GPT-4 |
 | DeepSeek | HuggingFace AutoTokenizer | V4 Pro, V4 Flash, V3.2, V3.1 |
 | Gemini | HuggingFace AutoTokenizer | 3.5 Flash, 3.1 Pro, 3.1 Flash Lite |
-| GLM | HuggingFace AutoTokenizer | GLM 5.1, GLM 5, GLM 4.7 |
-| Kimi | HuggingFace AutoTokenizer | K2.6, K2.5 |
+| GLM | HuggingFace AutoTokenizer | GLM 5.2, GLM 5.1, GLM 5, GLM 4.7 |
+| Kimi | HuggingFace AutoTokenizer | K2.7 Code, K2.6, K2.5 |
 | MiMo | HuggingFace AutoTokenizer | V2.5, V2.5 Pro, V2 Flash |
-| Qwen | HuggingFace AutoTokenizer | Qwen 3.6, Qwen 3.5 |
-| MiniMax | HuggingFace AutoTokenizer | M2.7, M2.5 |
+| Qwen | HuggingFace AutoTokenizer | Qwen3.7, Qwen 3.6, Qwen 3.5, Qwen 3 |
+| MiniMax | HuggingFace AutoTokenizer | M3, M2.7, M2.5 |
 
 You can also input any HuggingFace model ID in the **Custom** field for ad-hoc token counting.
 
