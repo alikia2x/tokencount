@@ -22,18 +22,20 @@ const OPENAI_VARIANTS: ModelVariant[] = [
 
 const DEEPSEEK_VARIANTS: ModelVariant[] = [
 	{ hfModelId: "deepseek-ai/DeepSeek-V4-Pro", displayName: "V4 Pro" },
-	{ hfModelId: "deepseek-ai/DeepSeek-V4-Flash", displayName: "V4 Flash" },
+	{ hfModelId: "deepseek-ai/DeepSeek-V4-Pro", displayName: "V4 Flash" },
 	{ hfModelId: "deepseek-ai/DeepSeek-V3.2", displayName: "V3.2" },
 	{ hfModelId: "deepseek-ai/DeepSeek-V3.1", displayName: "V3.1" },
 ];
 
 const GLM_VARIANTS: ModelVariant[] = [
+	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 5.2" },
 	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 5.1" },
-	{ hfModelId: "zai-org/GLM-5", displayName: "GLM 5" },
-	{ hfModelId: "zai-org/GLM-4.7", displayName: "GLM 4.7" },
+	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 5" },
+	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 4.7" },
 ];
 
 const KIMI_VARIANTS: ModelVariant[] = [
+	{ hfModelId: "alikia2x/k2.7-tokenizer", displayName: "K2.7 Code" },
 	{ hfModelId: "alikia2x/k2.6-tokenizer", displayName: "K2.6" },
 	{ hfModelId: "alikia2x/k2.6-tokenizer", displayName: "K2.5" },
 ];
@@ -45,12 +47,15 @@ const MIMO_VARIANTS: ModelVariant[] = [
 ];
 
 const QWEN_VARIANTS: ModelVariant[] = [
+	{ hfModelId: "Qwen/Qwen3.6-35B-A3B", displayName: "Qwen 3.7" },
 	{ hfModelId: "Qwen/Qwen3.6-35B-A3B", displayName: "Qwen 3.6" },
 	{ hfModelId: "Qwen/Qwen3.6-35B-A3B", displayName: "Qwen 3.5" },
+	{ hfModelId: "Qwen/Qwen3.6-35B-A3B", displayName: "Qwen 3" },
 ];
 
 const MINIMAX_VARIANTS: ModelVariant[] = [
-	{ hfModelId: "MiniMaxAI/MiniMax-M2.7", displayName: "M2.7" },
+	{ hfModelId: "MiniMaxAI/MiniMax-M2.5", displayName: "M3" },
+	{ hfModelId: "MiniMaxAI/MiniMax-M2.5", displayName: "M2.7" },
 	{ hfModelId: "MiniMaxAI/MiniMax-M2.5", displayName: "M2.5" },
 ];
 
