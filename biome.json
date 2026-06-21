@@ -54,5 +54,10 @@
 		"clientKind": "git",
 		"enabled": true,
 		"useIgnoreFile": true
+	},
+	"html": {
+		"formatter": {
+			"enabled": true
+		}
 	}
 }

@@ -65,7 +65,7 @@ const faqData: FAQType[] = [
 			<>
 				Unfortunately, it is currently impossible to count tokens for Claude models locally
 				because Anthropic has not publicly released their tokenizer vocabularies. If you
-				need to count tokens for Claude models, we recommend using {" "}
+				need to count tokens for Claude models, we recommend using{" "}
 				<a
 					href="https://claude-tokenizer.vercel.app/"
 					target="_blank"
