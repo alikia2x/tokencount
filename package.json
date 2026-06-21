@@ -1,29 +1,32 @@
 {
-	"name": "vite-template-solid",
-	"version": "1.0.6",
-	"description": "",
-	"type": "module",
-	"scripts": {
-		"start": "vite",
-		"dev": "vite",
-		"build": "vite build",
-		"serve": "vite preview",
-		"format": "bunx --bun biome format --write ."
-	},
-	"license": "MIT",
-	"devDependencies": {
-		"@biomejs/biome": "^2.5.0",
-		"@tailwindcss/vite": "^4.3.1",
-		"@types/node": "^25.9.4",
-		"solid-devtools": "^0.34.5",
-		"tailwindcss": "^4.3.1",
-		"typescript": "^5.9.3",
-		"vite": "^7.3.5",
-		"vite-plugin-solid": "^2.11.12"
-	},
-	"dependencies": {
-		"@huggingface/transformers": "^4.2.0",
-		"js-tiktoken": "^1.0.21",
-		"solid-js": "^1.9.13"
-	}
+  "name": "vite-template-solid",
+  "version": "1.0.6",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "format": "bunx --bun biome format --write .",
+    "deploy": "bun run build && wrangler deploy",
+    "preview": "bun run build && wrangler dev"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.0",
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/node": "^25.9.4",
+    "solid-devtools": "^0.34.5",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.5",
+    "vite-plugin-solid": "^2.11.12",
+    "wrangler": "^4.103.0"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
+    "js-tiktoken": "^1.0.21",
+    "solid-js": "^1.9.13"
+  }
 }
