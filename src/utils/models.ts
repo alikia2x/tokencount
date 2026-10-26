@@ -14,13 +14,15 @@ export interface ModelFamily {
 }
 
 const OPENAI_VARIANTS: ModelVariant[] = [
-	{ hfModelId: "", displayName: "GPT-5.x", openaiModel: "o200k_base" },
+	{ hfModelId: "", displayName: "GPT-6 Series", openaiModel: "o200k_base" },
+	{ hfModelId: "", displayName: "GPT-5 Series", openaiModel: "o200k_base" },
 	{ hfModelId: "", displayName: "GPT-4o", openaiModel: "o200k_base" },
 	{ hfModelId: "", displayName: "GPT-4", openaiModel: "cl100k_base" },
 	{ hfModelId: "", displayName: "GPT-OSS", openaiModel: "o200k_harmony" },
 ];
 
 const DEEPSEEK_VARIANTS: ModelVariant[] = [
+	{ hfModelId: "deepseek-ai/DeepSeek-V4-Pro", displayName: "V4.1 Flash" },
 	{ hfModelId: "deepseek-ai/DeepSeek-V4-Pro", displayName: "V4 Pro" },
 	{ hfModelId: "deepseek-ai/DeepSeek-V4-Pro", displayName: "V4 Flash" },
 	{ hfModelId: "deepseek-ai/DeepSeek-V3.2", displayName: "V3.2" },
@@ -28,6 +30,8 @@ const DEEPSEEK_VARIANTS: ModelVariant[] = [
 ];
 
 const GLM_VARIANTS: ModelVariant[] = [
+	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 5.3" },
+	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 5.3 Flash" },
 	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 5.2" },
 	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 5.1" },
 	{ hfModelId: "zai-org/GLM-5.1", displayName: "GLM 5" },
@@ -41,12 +45,15 @@ const KIMI_VARIANTS: ModelVariant[] = [
 ];
 
 const MIMO_VARIANTS: ModelVariant[] = [
+	{ hfModelId: "XiaomiMiMo/MiMo-V2.6-Pro-RL", displayName: "V2.6 Pro" },
+	{ hfModelId: "XiaomiMiMo/MiMo-V2.6-Pro-RL", displayName: "V2.6 Flash" },
 	{ hfModelId: "XiaomiMiMo/MiMo-V2.5", displayName: "V2.5" },
 	{ hfModelId: "XiaomiMiMo/MiMo-V2.5-Pro", displayName: "V2.5 Pro" },
 	{ hfModelId: "XiaomiMiMo/MiMo-V2-Flash", displayName: "V2 Flash" },
 ];
 
 const QWEN_VARIANTS: ModelVariant[] = [
+	{ hfModelId: "Qwen/Qwen3.6-35B-A3B", displayName: "Qwen 3.8" },
 	{ hfModelId: "Qwen/Qwen3.6-35B-A3B", displayName: "Qwen 3.7" },
 	{ hfModelId: "Qwen/Qwen3.6-35B-A3B", displayName: "Qwen 3.6" },
 	{ hfModelId: "Qwen/Qwen3.6-35B-A3B", displayName: "Qwen 3.5" },
@@ -55,6 +62,7 @@ const QWEN_VARIANTS: ModelVariant[] = [
 
 const MINIMAX_VARIANTS: ModelVariant[] = [
 	{ hfModelId: "MiniMaxAI/MiniMax-M2.5", displayName: "M3" },
+	{ hfModelId: "MiniMaxAI/MiniMax-M2.5", displayName: "M3.1 Flash" },
 	{ hfModelId: "MiniMaxAI/MiniMax-M2.5", displayName: "M2.7" },
 	{ hfModelId: "MiniMaxAI/MiniMax-M2.5", displayName: "M2.5" },
 ];
